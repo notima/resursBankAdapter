@@ -10,9 +10,9 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.notima.businessobjects.adapter</groupId>
   <artifactId>resursBankAdapter</artifactId>
-  <packaging>jar</packaging>
   <version>1.0.0-SNAPSHOT</version>
   <name>resursBankAdapter</name>
+  <packaging>bundle</packaging>
   <url>http://maven.apache.org</url>
 
   	<build>
@@ -23,8 +23,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.10.1</version>
 				<configuration>
-					<source>21</source>
-					<target>21</target>
+					<source>11</source>
+					<target>11</target>
 				</configuration>
 			</plugin>
 
@@ -69,6 +69,24 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>5.1.8</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-Activator>org.notima.businessobjects.adapter.csv.Activator</Bundle-Activator>
+						<Export-Package>org.notima.businessobjects.adapter.csv.*
+										</Export-Package>
+		        		<Private-Package>
+							org.apache.karaf.util.tracker,
+							org.apache.karaf.util.tracker.annotation
+        				</Private-Package>
+					</instructions>
+				</configuration>
 			</plugin>
 
 			<plugin>
@@ -135,4 +153,11 @@
 	</developers>
 
   
+	<dependencies>
+		<dependency>
+			<groupId>org.notima.generic.businessobjects.adapter</groupId>
+			<artifactId>csvAdapter</artifactId>
+			<version>1.10.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>

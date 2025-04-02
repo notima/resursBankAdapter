@@ -70,8 +70,8 @@ public class ResursToPaymentBatch {
 		dst.setAmount(src.getNetAmount());
 		dst.setOrderNo(src.getReceiptIdentity());
 		dst.setComment(src.getCustomerName());
-		// dst.setDestinationSystemReference(src.getTransactionId());
-		// dst.setDestinationSystemReferenceField("ExternalInvoiceReference2");
+		dst.setDestinationSystemReference(src.getReceiptIdentity());
+		dst.setDestinationSystemReferenceField("order");
 		dst.setClientOrderNo(src.getReceiptIdentity());
 		if (report.getCurrency()!=null) {
 			dst.setCurrency(report.getCurrency());

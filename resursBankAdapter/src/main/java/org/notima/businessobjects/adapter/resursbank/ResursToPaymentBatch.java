@@ -2,6 +2,8 @@ package org.notima.businessobjects.adapter.resursbank;
 
 import java.util.List;
 
+import org.notima.generic.businessobjects.BusinessPartner;
+import org.notima.generic.businessobjects.Location;
 import org.notima.generic.businessobjects.Payment;
 import org.notima.generic.businessobjects.PaymentBatch;
 import org.notima.generic.businessobjects.PaymentWriteOff;
@@ -63,13 +65,26 @@ public class ResursToPaymentBatch {
 		
 		Payment<ResursReportRow> dst = new Payment<ResursReportRow>();
 
+		// Create a business partner
+		@SuppressWarnings("rawtypes")
+		BusinessPartner<?> bp = new BusinessPartner();
+		Location addr = new Location();
+		
+		
 		dst.setNativePayment(src);
 		dst.setCustomerPayment(true);
 		dst.setPaymentDate(LocalDateUtils.asDate(src.getPaymentDate()));
 		dst.setOriginalAmount(src.getPurchaseAmount());
 		dst.setAmount(src.getNetAmount());
 		dst.setOrderNo(src.getReceiptIdentity());
-		dst.setComment(src.getCustomerName());
+		dst.setBusinessPartner(bp);
+		bp.setName(src.getCustomerName());
+		bp.setTaxId(src.getCustomerIdentityOriginal());
+		addr.setAddress1(src.getStreetAddress());
+		addr.setCity(src.getCity());
+		addr.setPostal(src.getZipCode());
+		bp.setAddressOfficial(addr);
+		
 		dst.setDestinationSystemReference(src.getReceiptIdentity());
 		dst.setDestinationSystemReferenceField("order");
 		dst.setClientOrderNo(src.getReceiptIdentity());

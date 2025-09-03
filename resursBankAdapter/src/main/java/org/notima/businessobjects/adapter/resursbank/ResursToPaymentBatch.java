@@ -86,7 +86,8 @@ public class ResursToPaymentBatch {
 		bp.setAddressOfficial(addr);
 		
 		dst.setDestinationSystemReference(src.getReceiptIdentity());
-		dst.setDestinationSystemReferenceField("order");
+		dst.setDestinationSystemReferenceField("ExternalInvoiceReference1");
+		dst.setDestinationSystemReferenceRegex("^.*?\\.(.*)$");
 		dst.setClientOrderNo(src.getReceiptIdentity());
 		if (report.getCurrency()!=null) {
 			dst.setCurrency(report.getCurrency());

@@ -134,7 +134,7 @@ public class ResursReportParser {
 		row.setTransactionDate(LocalDate.parse(record.get(9)));
 		
 		if (record.isMapped(K_TRANSACTION_DATE)) {
-			row.setPaymentDate(LocalDate.parse(record.get(K_TRANSACTION_DATE), dateFormat));
+			row.setTransactionDate(LocalDate.parse(record.get(K_TRANSACTION_DATE), dateFormat));
 		}
 		
 		row.setBatchIdentity(record.get(10));

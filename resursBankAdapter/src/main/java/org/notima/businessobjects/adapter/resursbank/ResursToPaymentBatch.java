@@ -6,7 +6,6 @@ import org.notima.generic.businessobjects.BusinessPartner;
 import org.notima.generic.businessobjects.Location;
 import org.notima.generic.businessobjects.Payment;
 import org.notima.generic.businessobjects.PaymentBatch;
-import org.notima.generic.businessobjects.PaymentWriteOff;
 import org.notima.generic.businessobjects.TransactionReference;
 import org.notima.resurs.ResursReport;
 import org.notima.resurs.ResursReportRow;
@@ -86,6 +85,7 @@ public class ResursToPaymentBatch {
 		bp.setAddressOfficial(addr);
 		
 		dst.setDestinationSystemReference(src.getReceiptIdentity());
+		dst.setPreMatchDestinationSystemReferenceRegex(".*?(\\d+).*");
 		dst.setDestinationSystemReferenceField("ExternalInvoiceReference1");
 		dst.setDestinationSystemReferenceRegex("^.*?\\.(.*)$");
 		dst.setClientOrderNo(src.getReceiptIdentity());

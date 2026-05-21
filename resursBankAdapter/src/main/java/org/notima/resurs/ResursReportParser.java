@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,7 +125,11 @@ public class ResursReportParser {
 		}
 
 		// Payment date is when resurs pays to us
-		row.setPaymentDate(LocalDate.parse(record.get(7), dateFormat));
+		try {
+			row.setPaymentDate(LocalDate.parse(record.get(7), dateFormat));
+		} catch (DateTimeParseException pe) {
+			System.err.println("Problem parsing payment date in file " + filename);
+		}
 		
 		if (record.isMapped(K_PAYMENT_DATE)) {
 			row.setPaymentDate(LocalDate.parse(record.get(K_PAYMENT_DATE), dateFormat));
